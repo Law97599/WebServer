@@ -1,0 +1,13 @@
+*
+!*.*
+!*/
+!*.cpp
+!*.h
+!makefile
+!Makefile
+
+*.o
+*.1
+*.log
+*.exe
+/.vscode
