@@ -2,80 +2,82 @@
  * @Author: JasonLaw
  * @Date: 2022-05-08 11:00:38
  * @LastEditors: JasonLaw
- * @LastEditTime: 2022-05-09 14:48:54
- * @FilePath: /WebServer-master/code/http/httprequest.h
- * @Description: 
+ * @LastEditTime: 2022-08-15 21:06:52
+ * @FilePath: /WebServer/code/http/httprequest.h
+ * @Description:
  */
 #ifndef HTTP_REQUEST_H
 #define HTTP_REQUEST_H
 
+#include <errno.h>
+#include <mysql/mysql.h>  //mysql
+
+#include <regex>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include <string>
-#include <regex>
-#include <errno.h>     
-#include <mysql/mysql.h>  //mysql
 
 #include "../buffer/buffer.h"
 #include "../log/log.h"
-#include "../pool/sqlconnpool.h"
 #include "../pool/sqlconnRAII.h"
+#include "../pool/sqlconnpool.h"
 
 class HttpRequest {
-public:
-    enum PARSE_STATE {
-        REQUEST_LINE,   // 正在解析请求首行
-        HEADERS,        // 头
-        BODY,           // 体
-        FINISH,         // 完成
-    };
+ public:
+  enum PARSE_STATE {
+    REQUEST_LINE,  // 正在解析请求首行
+    HEADERS,       // 头
+    BODY,          // 体
+    FINISH,        // 完成
+  };
 
-    enum HTTP_CODE {
-        NO_REQUEST = 0,
-        GET_REQUEST,
-        BAD_REQUEST,
-        NO_RESOURSE,
-        FORBIDDENT_REQUEST,
-        FILE_REQUEST,
-        INTERNAL_ERROR,
-        CLOSED_CONNECTION,
-    };
-    
-    HttpRequest() { Init(); }
-    ~HttpRequest() = default;
+  enum HTTP_CODE {
+    NO_REQUEST = 0,
+    GET_REQUEST,
+    BAD_REQUEST,
+    NO_RESOURSE,
+    FORBIDDENT_REQUEST,
+    FILE_REQUEST,
+    INTERNAL_ERROR,
+    CLOSED_CONNECTION,
+  };
 
-    void Init();
-    bool parse(Buffer& buff);
+  HttpRequest() { Init(); }
+  ~HttpRequest() = default;
 
-    std::string path() const;
-    std::string& path();
-    std::string method() const;
-    std::string version() const;
-    std::string GetPost(const std::string& key) const;
-    std::string GetPost(const char* key) const;
+  void Init();
+  bool parse(Buffer& buff);
 
-    bool IsKeepAlive() const;
+  std::string path() const;
+  std::string& path();
+  std::string method() const;
+  std::string version() const;
+  std::string GetPost(const std::string& key) const;
+  std::string GetPost(const char* key) const;
 
-private:
-    bool ParseRequestLine_(const std::string& line);
-    void ParseHeader_(const std::string& line);
-    void ParseBody_(const std::string& line);
+  bool IsKeepAlive() const;
 
-    void ParsePath_();
-    void ParsePost_();
-    void ParseFromUrlencoded_();
+ private:
+  bool ParseRequestLine_(const std::string& line);
+  void ParseHeader_(const std::string& line);
+  void ParseBody_(const std::string& line);
 
-    static bool UserVerify(const std::string& name, const std::string& pwd, bool isLogin);
+  void ParsePath_();
+  void ParsePost_();
+  void ParseFromUrlencoded_();
 
-    PARSE_STATE state_;                                     // 解析的状态
-    std::string method_, path_, version_, body_;            // 请求方法，请求路径，协议版本，请求体
-    std::unordered_map<std::string, std::string> header_;   // 请求头
-    std::unordered_map<std::string, std::string> post_;     // post请求表单数据
+  static bool UserVerify(const std::string& name, const std::string& pwd,
+                         bool isLogin);
 
-    static const std::unordered_set<std::string> DEFAULT_HTML;              // 默认的网页
-    static const std::unordered_map<std::string, int> DEFAULT_HTML_TAG; 
-    static int ConverHex(char ch);                                          // 转换成十六进制
+  PARSE_STATE state_;  // 解析的状态
+  std::string method_, path_, version_,
+      body_;  // 请求方法，请求路径，协议版本，请求体
+  std::unordered_map<std::string, std::string> header_;  // 请求头
+  std::unordered_map<std::string, std::string> post_;  // post请求表单数据
+
+  static const std::unordered_set<std::string> DEFAULT_HTML;  // 默认的网页
+  static const std::unordered_map<std::string, int> DEFAULT_HTML_TAG;
+  static int ConverHex(char ch);  // 转换成十六进制
 };
 
-
-#endif //HTTP_REQUEST_H
+#endif  // HTTP_REQUEST_H
