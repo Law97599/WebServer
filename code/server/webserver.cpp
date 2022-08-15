@@ -2,7 +2,7 @@
  * @Author: JasonLaw
  * @Date: 2022-05-08 11:00:38
  * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:08:28
+ * @LastEditTime: 2022-08-15 21:23:27
  * @FilePath: /WebServer/code/server/webserver.cpp
  * @Description:
  */
@@ -235,7 +235,7 @@ void WebServer::OnWrite_(HttpConn* client) {
   CloseConn_(client);
 }
 
-/* Create listenFd */
+// 创建监听socket
 bool WebServer::InitSocket_() {
   int ret;
   struct sockaddr_in addr;
