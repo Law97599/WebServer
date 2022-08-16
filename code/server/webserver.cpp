@@ -2,7 +2,7 @@
  * @Author: JasonLaw
  * @Date: 2022-05-08 11:00:38
  * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:23:27
+ * @LastEditTime: 2022-08-16 21:20:53
  * @FilePath: /WebServer/code/server/webserver.cpp
  * @Description:
  */
@@ -22,7 +22,7 @@ WebServer::WebServer(int port, int trigMode, int timeoutMS, bool OptLinger,
       threadpool_(new ThreadPool(threadNum)),
       epoller_(new Epoller()) {
   srcDir_ = getcwd(nullptr, 256);  // 获取当前的工作路径
-  // /home/nowcoder/WebServer-master/resources/
+                                   // /home/user/Law/WebServer
   assert(srcDir_);
   strncat(srcDir_, "/resources/", 16);
 
@@ -107,19 +107,13 @@ void WebServer::Start() {
 
       if (fd == listenFd_) {
         DealListen_();  // 处理监听的操作，接受客户端连接
-      }
-
-      else if (events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
+      } else if (events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
         assert(users_.count(fd) > 0);
         CloseConn_(&users_[fd]);  // 关闭连接
-      }
-
-      else if (events & EPOLLIN) {
+      } else if (events & EPOLLIN) {
         assert(users_.count(fd) > 0);
         DealRead_(&users_[fd]);  // 处理读操作
-      }
-
-      else if (events & EPOLLOUT) {
+      } else if (events & EPOLLOUT) {
         assert(users_.count(fd) > 0);
         DealWrite_(&users_[fd]);  // 处理写操作
       } else {
@@ -306,11 +300,5 @@ bool WebServer::InitSocket_() {
 // 设置文件描述符非阻塞
 int WebServer::SetFdNonblock(int fd) {
   assert(fd > 0);
-
-  // int flag = fcntl(fd, F_GETFD, 0);
-  // flag = flag  | O_NONBLOCK;
-  // // flag  |= O_NONBLOCK;
-  // fcntl(fd, F_SETFL, flag);
-
   return fcntl(fd, F_SETFL, fcntl(fd, F_GETFD, 0) | O_NONBLOCK);
 }
