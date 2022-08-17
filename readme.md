@@ -2,7 +2,7 @@
  * @Author: JasonLaw
  * @Date: 2022-05-08 11:00:38
  * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-17 23:07:30
+ * @LastEditTime: 2022-08-17 23:09:23
  * @FilePath: /WebServer/readme.md
  * @Description: 
 -->
@@ -78,7 +78,7 @@ make
 ```
 
 ## 压力测试
-![image-webbench](https://github.com/Law97599/WebServer/tree/main/readme.assest/PressTest.png)
+![image-webbench](https://github.com/Law97599/WebServer/blob/main/readme.assest/PressTest.png)
 ```bash
 ./webbench-1.5/webbench -c 100 -t 10 http://ip:port/
 ./webbench-1.5/webbench -c 1000 -t 10 http://ip:port/
