@@ -11,3 +11,5 @@
 *.log
 *.exe
 /.vscode
+.clang-format
+format_count.sh
