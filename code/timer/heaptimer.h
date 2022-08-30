@@ -27,43 +27,43 @@ typedef std::chrono::milliseconds MS;
 typedef Clock::time_point TimeStamp;
 
 struct TimerNode {
-    int id;
-    TimeStamp expires;
-    TimeoutCallBack cb;
-    bool operator<(const TimerNode &t) { return expires < t.expires; }
+  int id;
+  TimeStamp expires;
+  TimeoutCallBack cb;
+  bool operator<(const TimerNode& t) { return expires < t.expires; }
 };
 class HeapTimer {
-  public:
-    HeapTimer() { heap_.reserve(64); }
+ public:
+  HeapTimer() { heap_.reserve(64); }
 
-    ~HeapTimer() { clear(); }
+  ~HeapTimer() { clear(); }
 
-    void adjust(int id, int newExpires);
+  void adjust(int id, int newExpires);
 
-    void add(int id, int timeOut, const TimeoutCallBack &cb);
+  void add(int id, int timeOut, const TimeoutCallBack& cb);
 
-    void doWork(int id);
+  void doWork(int id);
 
-    void clear();
+  void clear();
 
-    void tick();
+  void tick();
 
-    void pop();
+  void pop();
 
-    int GetNextTick();
+  int GetNextTick();
 
-  private:
-    void del_(size_t i);
+ private:
+  void del_(size_t i);
 
-    void siftup_(size_t i);
+  void siftup_(size_t i);
 
-    bool siftdown_(size_t index, size_t n);
+  bool siftdown_(size_t index, size_t n);
 
-    void SwapNode_(size_t i, size_t j);
+  void SwapNode_(size_t i, size_t j);
 
-    std::vector<TimerNode> heap_;
+  std::vector<TimerNode> heap_;
 
-    std::unordered_map<int, size_t> ref_;
+  std::unordered_map<int, size_t> ref_;
 };
 
-#endif // HEAP_TIMER_H
+#endif  // HEAP_TIMER_H

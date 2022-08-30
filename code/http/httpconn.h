@@ -9,11 +9,11 @@
 #ifndef HTTP_CONN_H
 #define HTTP_CONN_H
 
-#include <arpa/inet.h> // sockaddr_in
+#include <arpa/inet.h>  // sockaddr_in
 #include <errno.h>
-#include <stdlib.h> // atoi()
+#include <stdlib.h>  // atoi()
 #include <sys/types.h>
-#include <sys/uio.h> // readv/writev
+#include <sys/uio.h>  // readv/writev
 
 #include "../buffer/buffer.h"
 #include "../log/log.h"
@@ -22,51 +22,51 @@
 #include "httpresponse.h"
 
 class HttpConn {
-  public:
-    HttpConn();
+ public:
+  HttpConn();
 
-    ~HttpConn();
+  ~HttpConn();
 
-    void init(int sockFd, const sockaddr_in &addr);
+  void init(int sockFd, const sockaddr_in& addr);
 
-    ssize_t read(int *saveErrno);
+  ssize_t read(int* saveErrno);
 
-    ssize_t write(int *saveErrno);
+  ssize_t write(int* saveErrno);
 
-    void Close();
+  void Close();
 
-    int GetFd() const;
+  int GetFd() const;
 
-    int GetPort() const;
+  int GetPort() const;
 
-    const char *GetIP() const;
+  const char* GetIP() const;
 
-    sockaddr_in GetAddr() const;
+  sockaddr_in GetAddr() const;
 
-    bool process();
+  bool process();
 
-    int ToWriteBytes() { return iov_[0].iov_len + iov_[1].iov_len; }
+  int ToWriteBytes() { return iov_[0].iov_len + iov_[1].iov_len; }
 
-    bool IsKeepAlive() const { return request_.IsKeepAlive(); }
+  bool IsKeepAlive() const { return request_.IsKeepAlive(); }
 
-    static bool isET;
-    static const char *srcDir;         // 资源的目录
-    static std::atomic<int> userCount; // 总共的客户单的连接数
+  static bool isET;
+  static const char* srcDir;          // 资源的目录
+  static std::atomic<int> userCount;  // 总共的客户单的连接数
 
-  private:
-    int fd_;
-    struct sockaddr_in addr_;
+ private:
+  int fd_;
+  struct sockaddr_in addr_;
 
-    bool isClose_;
+  bool isClose_;
 
-    int iovCnt_;
-    struct iovec iov_[2];
+  int iovCnt_;
+  struct iovec iov_[2];
 
-    Buffer readBuff_;  // 读(请求)缓冲区，保存请求数据的内容
-    Buffer writeBuff_; // 写(响应)缓冲区，保存响应数据的内容
+  Buffer readBuff_;   // 读(请求)缓冲区，保存请求数据的内容
+  Buffer writeBuff_;  // 写(响应)缓冲区，保存响应数据的内容
 
-    HttpRequest request_;
-    HttpResponse response_;
+  HttpRequest request_;
+  HttpResponse response_;
 };
 
-#endif // HTTP_CONN_H
+#endif  // HTTP_CONN_H
