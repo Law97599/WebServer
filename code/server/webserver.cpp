@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-16 21:20:53
- * @FilePath: /WebServer/code/server/webserver.cpp
- * @Description:
+/**
+ * @file webserver.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "webserver.h"
 

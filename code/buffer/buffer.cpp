@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-16 21:20:45
- * @FilePath: /WebServer/code/buffer/buffer.cpp
- * @Description:
+/**
+ * @file buffer.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "buffer.h"
 
@@ -14,18 +16,12 @@ Buffer::Buffer(int initBuffSize)
 size_t Buffer::ReadableBytes() const {  // 可以读的数据的大小
   return writePos_ - readPos_;
 }
-size_t Buffer::WritableBytes() const {
-  return buffer_.size() - writePos_;
-}
+size_t Buffer::WritableBytes() const { return buffer_.size() - writePos_; }
 
 // 前面可以用的空间
-size_t Buffer::PrependableBytes() const {
-  return readPos_;
-}
+size_t Buffer::PrependableBytes() const { return readPos_; }
 
-const char* Buffer::Peek() const {
-  return BeginPtr_() + readPos_;
-}
+const char* Buffer::Peek() const { return BeginPtr_() + readPos_; }
 
 void Buffer::Retrieve(size_t len) {
   assert(len <= ReadableBytes());
@@ -50,17 +46,11 @@ std::string Buffer::RetrieveAllToStr() {
   return str;
 }
 
-const char* Buffer::BeginWriteConst() const {
-  return BeginPtr_() + writePos_;
-}
+const char* Buffer::BeginWriteConst() const { return BeginPtr_() + writePos_; }
 
-char* Buffer::BeginWrite() {
-  return BeginPtr_() + writePos_;
-}
+char* Buffer::BeginWrite() { return BeginPtr_() + writePos_; }
 
-void Buffer::HasWritten(size_t len) {
-  writePos_ += len;
-}
+void Buffer::HasWritten(size_t len) { writePos_ += len; }
 
 void Buffer::Append(const std::string& str) {
   Append(str.data(), str.length());
@@ -126,13 +116,9 @@ ssize_t Buffer::WriteFd(int fd, int* saveErrno) {
   return len;
 }
 
-char* Buffer::BeginPtr_() {
-  return &*buffer_.begin();
-}
+char* Buffer::BeginPtr_() { return &*buffer_.begin(); }
 
-const char* Buffer::BeginPtr_() const {
-  return &*buffer_.begin();
-}
+const char* Buffer::BeginPtr_() const { return &*buffer_.begin(); }
 
 void Buffer::MakeSpace_(size_t len) {
   if (WritableBytes() + PrependableBytes() < len) {

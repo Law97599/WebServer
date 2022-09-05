@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-16 20:10:47
- * @FilePath: /WebServer/code/timer/heaptimer.cpp
- * @Description:
+/**
+ * @file heaptimer.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "heaptimer.h"
 
@@ -35,10 +37,8 @@ bool HeapTimer::siftdown_(size_t index, size_t n) {
   size_t i = index;
   size_t j = i * 2 + 1;
   while (j < n) {
-    if (j + 1 < n && heap_[j + 1] < heap_[j])
-      j++;
-    if (heap_[i] < heap_[j])
-      break;
+    if (j + 1 < n && heap_[j + 1] < heap_[j]) j++;
+    if (heap_[i] < heap_[j]) break;
     SwapNode_(i, j);
     i = j;
     j = i * 2 + 1;

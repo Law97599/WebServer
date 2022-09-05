@@ -1,16 +1,18 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:03:52
- * @FilePath: /WebServer/code/pool/sqlconnRAII.h
- * @Description:
+/**
+ * @file sqlconnRAII.h
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #ifndef SQLCONNRAII_H
 #define SQLCONNRAII_H
 #include "sqlconnpool.h"
 
-/* 资源在对象构造初始化 资源在对象析构时释放*/
+/* 资源在对象构造初始化 资源在对象析构时释放 */
 class SqlConnRAII {
  public:
   SqlConnRAII(MYSQL** sql, SqlConnPool* connpool) {

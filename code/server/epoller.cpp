@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:03:39
- * @FilePath: /WebServer/code/server/epoller.cpp
- * @Description:
+/**
+ * @file epoller.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "epoller.h"
 
@@ -13,13 +15,10 @@ Epoller::Epoller(int maxEvent)
   assert(epollFd_ >= 0 && events_.size() > 0);
 }
 
-Epoller::~Epoller() {
-  close(epollFd_);
-}
+Epoller::~Epoller() { close(epollFd_); }
 
 bool Epoller::AddFd(int fd, uint32_t events) {
-  if (fd < 0)
-    return false;
+  if (fd < 0) return false;
   epoll_event ev = {0};
   ev.data.fd = fd;
   ev.events = events;
@@ -27,8 +26,7 @@ bool Epoller::AddFd(int fd, uint32_t events) {
 }
 
 bool Epoller::ModFd(int fd, uint32_t events) {
-  if (fd < 0)
-    return false;
+  if (fd < 0) return false;
   epoll_event ev = {0};
   ev.data.fd = fd;
   ev.events = events;
@@ -36,8 +34,7 @@ bool Epoller::ModFd(int fd, uint32_t events) {
 }
 
 bool Epoller::DelFd(int fd) {
-  if (fd < 0)
-    return false;
+  if (fd < 0) return false;
   epoll_event ev = {0};
   return 0 == epoll_ctl(epollFd_, EPOLL_CTL_DEL, fd, &ev);
 }

@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:09:09
- * @FilePath: /WebServer/code/http/httpconn.cpp
- * @Description:
+/**
+ * @file httpconn.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "httpconn.h"
 using namespace std;
@@ -20,9 +22,7 @@ HttpConn::HttpConn() {
   isClose_ = true;
 };
 
-HttpConn::~HttpConn() {
-  Close();
-};
+HttpConn::~HttpConn() { Close(); };
 
 void HttpConn::init(int fd, const sockaddr_in& addr) {
   assert(fd > 0);
@@ -47,21 +47,15 @@ void HttpConn::Close() {
   }
 }
 
-int HttpConn::GetFd() const {
-  return fd_;
-};
+int HttpConn::GetFd() const { return fd_; };
 
 struct sockaddr_in HttpConn::GetAddr() const {
   return addr_;
 }
 
-const char* HttpConn::GetIP() const {
-  return inet_ntoa(addr_.sin_addr);
-}
+const char* HttpConn::GetIP() const { return inet_ntoa(addr_.sin_addr); }
 
-int HttpConn::GetPort() const {
-  return addr_.sin_port;
-}
+int HttpConn::GetPort() const { return addr_.sin_port; }
 
 ssize_t HttpConn::read(int* saveErrno) {
   ssize_t len = -1;

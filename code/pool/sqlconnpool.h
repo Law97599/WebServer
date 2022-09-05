@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:03:54
- * @FilePath: /WebServer/code/pool/sqlconnpool.h
- * @Description:
+/**
+ * @file sqlconnpool.h
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #ifndef SQLCONNPOOL_H
 #define SQLCONNPOOL_H

@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:08:42
- * @FilePath: /WebServer/code/log/log.cpp
- * @Description:
+/**
+ * @file log.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "log.h"
 
@@ -193,6 +195,4 @@ Log* Log::Instance() {
   return &inst;
 }
 
-void Log::FlushLogThread() {
-  Log::Instance()->AsyncWrite_();
-}
+void Log::FlushLogThread() { Log::Instance()->AsyncWrite_(); }

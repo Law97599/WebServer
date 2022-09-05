@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:09:03
- * @FilePath: /WebServer/code/http/httprequest.cpp
- * @Description:
+/**
+ * @file httprequest.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "httprequest.h"
 using namespace std;
@@ -121,10 +123,8 @@ void HttpRequest::ParseBody_(const string& line) {
 }
 
 int HttpRequest::ConverHex(char ch) {
-  if (ch >= 'A' && ch <= 'F')
-    return ch - 'A' + 10;
-  if (ch >= 'a' && ch <= 'f')
-    return ch - 'a' + 10;
+  if (ch >= 'A' && ch <= 'F') return ch - 'A' + 10;
+  if (ch >= 'a' && ch <= 'f') return ch - 'a' + 10;
   return ch;
 }
 
@@ -261,21 +261,13 @@ bool HttpRequest::UserVerify(const string& name, const string& pwd,
   return flag;
 }
 
-std::string HttpRequest::path() const {
-  return path_;
-}
+std::string HttpRequest::path() const { return path_; }
 
-std::string& HttpRequest::path() {
-  return path_;
-}
+std::string& HttpRequest::path() { return path_; }
 
-std::string HttpRequest::method() const {
-  return method_;
-}
+std::string HttpRequest::method() const { return method_; }
 
-std::string HttpRequest::version() const {
-  return version_;
-}
+std::string HttpRequest::version() const { return version_; }
 
 std::string HttpRequest::GetPost(const std::string& key) const {
   assert(key != "");

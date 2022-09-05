@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:08:47
- * @FilePath: /WebServer/code/log/blockqueue.h
- * @Description:
+/**
+ * @file blockqueue.h
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #ifndef BLOCKQUEUE_H
 #define BLOCKQUEUE_H

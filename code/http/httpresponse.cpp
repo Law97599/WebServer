@@ -1,10 +1,12 @@
-/*
- * @Author: JasonLaw
- * @Date: 2022-05-08 11:00:38
- * @LastEditors: JasonLaw
- * @LastEditTime: 2022-08-15 21:08:55
- * @FilePath: /WebServer/code/http/httpresponse.cpp
- * @Description:
+/**
+ * @file httpresponse.cpp
+ * @author JasonLaw (luozuxuan@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-05
+ *
+ * @copyright Copyright (c) 2022
+ *
  */
 #include "httpresponse.h"
 
@@ -53,9 +55,7 @@ HttpResponse::HttpResponse() {
   mmFileStat_ = {0};
 };
 
-HttpResponse::~HttpResponse() {
-  UnmapFile();
-}
+HttpResponse::~HttpResponse() { UnmapFile(); }
 
 void HttpResponse::Init(const string& srcDir, string& path, bool isKeepAlive,
                         int code) {
@@ -91,13 +91,9 @@ void HttpResponse::MakeResponse(Buffer& buff) {
   AddContent_(buff);
 }
 
-char* HttpResponse::File() {
-  return mmFile_;
-}
+char* HttpResponse::File() { return mmFile_; }
 
-size_t HttpResponse::FileLen() const {
-  return mmFileStat_.st_size;
-}
+size_t HttpResponse::FileLen() const { return mmFileStat_.st_size; }
 
 void HttpResponse::ErrorHtml_() {
   if (CODE_PATH.count(code_) == 1) {
